@@ -45,7 +45,8 @@ class Avo::ResourceComponent < Avo::BaseComponent
 
     if @reflection.present?
       # Fetch the appropiate resource
-      reflection_resource = ::Avo::App.get_resource_by_model_name(@reflection.active_record.name)
+      reflection_resource = ::Avo::App.get_resource_by_model_name(@parent_model&.class&.name || @reflection.active_record.name)
+
       # Fetch the model
       # Hydrate the resource with the model if we have one
       reflection_resource.hydrate(model: @parent_model) if @parent_model.present?
